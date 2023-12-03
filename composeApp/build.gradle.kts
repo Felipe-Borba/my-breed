@@ -11,11 +11,11 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = "11"
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -26,9 +26,9 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
-        
+
         androidMain.dependencies {
             implementation(libs.compose.ui)
             implementation(libs.compose.ui.tooling.preview)
@@ -40,6 +40,11 @@ kotlin {
             implementation(compose.material)
             @OptIn(ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
+
+            val precompose_version = "1.5.7"
+            implementation(compose.animation)
+            implementation("moe.tlaster:precompose:$precompose_version")
+            implementation("moe.tlaster:precompose-viewmodel:$precompose_version")
         }
     }
 }
@@ -76,8 +81,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
