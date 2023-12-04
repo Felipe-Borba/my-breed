@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+    id("app.cash.sqldelight") version "2.0.1"
 }
 
 kotlin {
@@ -33,6 +34,8 @@ kotlin {
             implementation(libs.compose.ui)
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
+
+            implementation("app.cash.sqldelight:android-driver:2.0.1")
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -45,6 +48,19 @@ kotlin {
             implementation(compose.animation)
             implementation("moe.tlaster:precompose:$precompose_version")
             implementation("moe.tlaster:precompose-viewmodel:$precompose_version")
+
+            implementation("app.cash.sqldelight:coroutines-extensions:2.0.1")
+        }
+        iosMain.dependencies {
+            implementation("app.cash.sqldelight:native-driver:2.0.1")
+        }
+    }
+}
+
+sqldelight {
+    databases {
+        create("Database") {
+            packageName.set("com.felipeborba.mybreed")
         }
     }
 }
@@ -87,5 +103,8 @@ android {
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
+}
+dependencies {
+    implementation(libs.androidx.room.common)
 }
 

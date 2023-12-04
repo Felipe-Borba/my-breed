@@ -4,8 +4,9 @@ import moe.tlaster.precompose.PreComposeApp
 import navigation.Navigation
 
 @Composable
-fun App() {
+fun App(driverFactory: DriverFactory) {
     PreComposeApp {
+        createDatabase(driverFactory)
         MaterialTheme {
             Navigation()
         }

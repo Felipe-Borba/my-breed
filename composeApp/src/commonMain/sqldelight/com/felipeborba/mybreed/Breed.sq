@@ -1,0 +1,13 @@
+CREATE TABLE breed (
+  id INTEGER PRIMARY KEY NOT NULL,
+  name TEXT NOT NULL,
+  created_at INTEGER DEFAULT (strftime('%s', 'now')),
+  updated_at INTEGER DEFAULT (strftime('%s', 'now'))
+);
+
+INSERT INTO breed (id, name) VALUES
+(1, "caramelo");
+
+selectAll:
+SELECT *
+FROM breed;
